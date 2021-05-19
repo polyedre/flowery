@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-from flowery import Flowery
 import unittest
+
+from rich.console import Console
+from flowery import Presentation
 
 EXAMPLE_PRESENTATION = """# Slide 1
 
@@ -21,12 +23,29 @@ ls *
 
 
 class TestPlaySlides(unittest.TestCase):
-    def test_play_3_slides(self):
-        presentation = Flowery(EXAMPLE_PRESENTATION)
-        self.assertEqual(len(presentation), 3)
+    def test_first_slide(self):
+        presentation = Presentation(EXAMPLE_PRESENTATION)
+        with presentation.live.console.capture() as capture:
+            presentation.start()
+            presentation.stop()
+        self.assertIn("Slide 1", capture.get())
 
-        for _ in range(len(presentation)):
+    def test_second_slide(self):
+        presentation = Presentation(EXAMPLE_PRESENTATION)
+        with presentation.live.console.capture() as capture:
+            presentation.start()
             presentation.next()
+            presentation.stop()
+        self.assertIn("Slide 2", capture.get())
+
+    def test_third_slide(self):
+        presentation = Presentation(EXAMPLE_PRESENTATION)
+        with presentation.live.console.capture() as capture:
+            presentation.start()
+            presentation.next()
+            presentation.next()
+            presentation.stop()
+        self.assertIn("Slide 3", capture.get())
 
 
 if __name__ == "__main__":
