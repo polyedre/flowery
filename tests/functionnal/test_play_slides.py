@@ -2,7 +2,6 @@
 
 import unittest
 
-from rich.console import Console
 from flowery import Presentation
 
 EXAMPLE_PRESENTATION = """# Slide 1

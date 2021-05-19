@@ -8,11 +8,11 @@ from flowery import Presentation
 
 class TestPresentation(unittest.TestCase):
     def test_can_be_instantiated(self):
-        presentation = Presentation("""# Slide""")
+        Presentation("""# Slide""")
 
     def test_fail_if_empty(self):
         with self.assertRaises(TypeError):
-            presentation = Presentation()
+            Presentation()
 
     def test_2_slides_if_2_titles(self):
         presentation = Presentation(
