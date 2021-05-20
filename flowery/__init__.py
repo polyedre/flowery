@@ -3,6 +3,7 @@
 from rich.live import Live
 from rich.markdown import Markdown
 from rich.padding import Padding
+from rich.layout import Layout
 
 
 class Presentation:
@@ -11,7 +12,7 @@ class Presentation:
         for i in range(1, len(self.slides)):
             self.slides[i] = "# " + self.slides[i]
         self.index = 0
-        self.live = Live(Markdown(self.slides[self.index]))
+        self.live = Live()
 
     def start(self):
         self.live.start()
@@ -27,7 +28,7 @@ class Presentation:
         self.update()
 
     def update(self):
-        self.live.update(Padding(Markdown(self.slides[self.index]), (2, 2)))
+        self.live.update(Layout(Padding(Markdown(self.slides[self.index]), (2, 2))))
 
     @property
     def started(self):
