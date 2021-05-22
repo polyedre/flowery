@@ -23,6 +23,7 @@ class Presentation:
 
     def next(self):
         if self.index >= self.__len__() - 1:
+            self.stop()
             return
         self.index = self.index + 1
         self.update()
