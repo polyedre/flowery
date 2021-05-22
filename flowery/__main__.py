@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-import os
 import sys
 import time
+
+from pynput import keyboard
 
 from flowery import Presentation
 
@@ -10,6 +11,16 @@ from flowery import Presentation
 def show_help():
     print(f"Usage: {sys.argv[0]} FILENAME")
 
+def on_press(_):
+    pass
+
+def on_release(key):
+    if key == keyboard.Key.space:
+        presentation.next()
+        return presentation.started
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
 
 if __name__ == "__main__":
 
@@ -28,8 +39,7 @@ if __name__ == "__main__":
     presentation = Presentation(file_content)
     presentation.start()
 
-    for _ in range(len(presentation)):
-        time.sleep(1)
-        presentation.next()
-
-    presentation.stop()
+    with keyboard.Listener(
+            on_press=on_press,
+            on_release=on_release) as listener:
+        listener.join()
