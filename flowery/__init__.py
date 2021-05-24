@@ -8,7 +8,8 @@ from rich.layout import Layout
 
 class Presentation:
     def __init__(self, content):
-        self.slides = [slide_content for slide_content in content.split("\n# ")]
+        self.slides = [slide_content.strip() for slide_content in content.split("---\n")]
+        print(self.slides)
         for i in range(1, len(self.slides)):
             self.slides[i] = "# " + self.slides[i]
         self.index = 0
