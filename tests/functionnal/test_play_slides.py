@@ -8,11 +8,15 @@ EXAMPLE_PRESENTATION = """# Slide 1
 
 This is the content of the slide
 
+---
+
 # Slide 2
 
 ```sh
 ls *
 ```
+
+---
 
 # Slide 3
 
